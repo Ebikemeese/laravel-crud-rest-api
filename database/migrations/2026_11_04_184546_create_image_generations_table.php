@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('image_generations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->string('image_path');
+            $table->text('generated_prompt');
+            $table->string('original_filename');
+            $table->integer('file_size');
+            $table->string('mime_type');
             $table->timestamps();
         });
     }

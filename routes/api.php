@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V2\PostController as V2PostController;
+use App\Http\Controllers\Api\V1\PromptGenerationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,9 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function() {
     Route::prefix('v2')->group(function () {
         Route::apiResource('posts', V2PostController::class);
     });
+
+    Route::apiResource('prompt-generations', PromptGenerationController::class)
+        ->only(['index', 'store']);
 });
 
 require __DIR__.'/auth.php';
